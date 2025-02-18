@@ -8,12 +8,14 @@ ws.on("connection", (socket) => {
         var _a;
         const parsedMessage = JSON.parse(message.toString());
         if (parsedMessage.type === "join") {
+            console.log("User joined: " + parsedMessage.payload.roomId);
             allsocket.push({
                 socket,
                 room: parsedMessage.payload.roomId
             });
         }
         if (parsedMessage.type === "chat") {
+            console.log("user wants to chat");
             const currentUserRoom = (_a = allsocket.find((user) => user.socket === socket)) === null || _a === void 0 ? void 0 : _a.room;
             for (let i = 0; i < allsocket.length; i++) {
                 if (allsocket[i].room == currentUserRoom) {
